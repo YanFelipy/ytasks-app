@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 :root {
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
@@ -8,7 +9,6 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #d9d9d9;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,3 +26,111 @@ li {
 body {
   position: relative;
 }
+
+.young {
+  animation: bounceImage 10s ease-in-out infinite;
+}
+
+
+@keyframes bounceImage {
+0% {
+  transform:  translateX(0px)
+}
+50% {
+  transform: translateX(-50px);
+}
+100% {
+ transform: translateX(0px);
+}
+}
+
+
+    @keyframes flyUp {
+      0% {
+        top: 100%;
+        transform: rotateZ(0deg) translateX(0);
+        opacity: 0%;
+      }
+
+      25% {
+      
+        transform: rotateZ(30deg) translateX(20px)  rotateY(20deg) scale(0.8, 1);
+      }
+
+        50% {
+        transform: rotateZ(-30deg) translateX(20px) rotateX(-80deg) scale(1,1);
+    opacity: 100%;
+      }
+      100% {
+        top: -150px;
+        transform: rotateZ(-10deg) translateX(-20px);
+        opacity: 0;
+      }
+    }
+
+       .note {
+      width: 120px;
+      height: 120px;
+      background-color: #fffd87;
+      position: absolute;
+      top: 100%;
+      border: 1px solid #e3e3e3;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      transform: rotateZ(0deg);
+      animation: flyUp 15s ease-in-out infinite;
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    .note:nth-child(2) {
+      background-color: #a5ffd6;
+      left: 20%;
+      animation-delay: 2s;
+    }
+
+    .note:nth-child(3) {
+      background-color: #ffa69e;
+      left: 50%;
+      animation-delay: 4s;
+    }
+
+    .note:nth-child(4) {
+      background-color: #b8f2e6;
+      left: 70%;
+      animation-delay: 6s;
+    }
+
+    .note:nth-child(5) {
+      background-color: #fcd5ce;
+      left: 90%;
+      animation-delay: 8s;
+    }
+    
+      .note:nth-child(6) {
+      background-color: #fcd5ce;
+      left: 80%;
+      animation-delay: 10s;
+    }
+    
+
+    
+         .btn-grad {
+          background-image: linear-gradient(to right, #00ddff 0%, #d300de  51%, #d9ff00  80%, #05cf34 100%)}
+         .btn-grad {
+  
+            padding: 15px 45px;
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            
+          }
+
+          .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         

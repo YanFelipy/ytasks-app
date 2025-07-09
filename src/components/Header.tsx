@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-evenly bg-gray-100 min-h-20">
+    <header className="flex items-center justify-evenly bg-gray-100 min-h-20 shadow-md">
       <div className="w-15">
           <Link to="/">
         <img src={Logo} />
