@@ -17,11 +17,13 @@
 
 
 }
+
 a li i:hover {
   color: transparent;
-background-image: linear-gradient(to right, #00ddff 0%, #d300de 51%, #d9ff00 80%, #05cf34 100%);
-background-clip:text;
+  background-image: linear-gradient(to right, #00ddff 0%, #d300de 51%, #d9ff00 80%, #05cf34 100%);
+  background-clip: text;
 }
+
 li {
   padding: 2px;
   margin: 2px
@@ -32,7 +34,7 @@ li {
   user-select: none;
 }
 
-*{
+* {
   overflow-x: none;
 
 }
@@ -45,16 +47,18 @@ li {
 }
 
 @keyframes cssAnimation {
-0% {
-  transform: translate(0px)}
+  0% {
+    transform: translate(0px)
+  }
 
   10% {
-  transform: translate(-50px)}
- 
+    transform: translate(-50px)
+  }
 
-100% {
-  transform: translateX(200%)
-}
+
+  100% {
+    transform: translateX(200%)
+  }
 }
 
 .note {
@@ -69,7 +73,7 @@ li {
   animation: flyUp 7s ease-in-out infinite;
   opacity: 0;
   z-index: -1;
-    user-select: none;
+  user-select: none;
 }
 
 
@@ -138,7 +142,7 @@ li {
   }
 
   50% {
-    transform: translateX(-50px);
+    transform: translateX(50px);
   }
 
   100% {
@@ -171,3 +175,71 @@ li {
   }
 }
 
+
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1023px) {
+  .container {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box-animation {
+    justify-content: center;
+  }
+
+  @media (max-height: 667px) {
+    #root {
+      min-height: 667px;
+      max-width: 100vw;
+    }
+
+    header {
+      width: 105%;
+    }
+
+    .box-animation {
+      width: 80%;
+    }
+
+    .box-intro {
+      width: 90%;
+    }
+
+    .box-intro h1 {
+
+      font-size: 2em;
+      padding: 0.5em;
+    }
+
+    .box-intro p {
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .box-intro button {
+      width: 50%;
+
+      padding: 5px;
+      font-size: 1em;
+
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .buttons a {
+      width: 40%;
+      padding: 5px;
+
+      height: fit-content;
+    }
+  }
+}
