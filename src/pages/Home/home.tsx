@@ -32,7 +32,7 @@ const Home = () => {
            <div className="box-intro w-2xl flex justify-center ">
 
             <div className="intro p-2 shadow-lg gap-5 h-120 bg-white br-20  mb-0 w-120 rounded-2xl flex flex-col items-center">
-<h1 className="font-sans  font-500 text-5xl/14   text-shadow-xs text-gray-800 text-line-20 p-8">Crie notas e tarefas de forma simples. </h1>
+<h1 className="font-sans  font-500 text-5xl/14   text-shadow-xs text-gray-800 text-line-20 p-5">Crie notas e tarefas de forma simples. </h1>
 <p className='px-6 mb-10 text-gray-500'>Precisa organizar suas atividades? Crie e gerencie suas tarefas diárias de forma simples e eficiente em nosso site! Comece agora a planejar seu dia e aumente sua produtividade.</p>
 <div className='flex items-center buttons '>
             <button onClick={ani} className='btn-grad  mr-5'>
