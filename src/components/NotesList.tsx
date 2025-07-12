@@ -4,7 +4,7 @@ interface Props {
   textCard : string,
 
 }
-const TaskList = ({textCard } : Props) => {
+const NotesList = ({textCard } : Props) => {
 const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 const ref = useRef<HTMLDivElement>(null)
 
@@ -22,7 +22,7 @@ const ref = useRef<HTMLDivElement>(null)
       <div ref={ref} className="task bg-orange-800 ">
 <div className="flex justify-around items-center min-h-20">
   <div className="flex">
-<input className="mr-2" type="checkbox" />
+
 
   <h4> {textCard}</h4>
 
@@ -36,7 +36,7 @@ Ver Mais
         <div className="task bg-blue-400 ">
 <div className="flex justify-around items-center min-h-20">
   <div className="flex">
-  <input type="checkbox" />
+
   <h4> Título da Tarefa</h4>
 
   </div>
@@ -50,7 +50,7 @@ Ver Mais
   <div className="task bg-yellow-500 ">
 <div className="flex justify-around items-center min-h-20">
   <div className="flex">
-  <input type="checkbox" />
+
   <h4> Título da Tarefa</h4>
 
   </div>
@@ -67,4 +67,4 @@ Ver Mais
   )
 }
 
-export default TaskList
+export default NotesList
