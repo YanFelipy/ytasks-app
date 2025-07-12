@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router"
-import Home from '../pages/Home/home'
+
+//Pages
+import Home from '../pages/Home/Home'
+import CreateTask from "../pages/CreateTask/CreateTask"
 
 
 
@@ -8,7 +11,7 @@ const RoutePages = () => {
 
     <Routes>
 <Route path="/" element={<Home />} />
-
+<Route path="/create-tasks" element={<CreateTask/>} />
     </Routes>
   )
 }

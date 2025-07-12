@@ -17,6 +17,28 @@
 
 
 }
+button {
+  cursor: pointer;
+}
+
+
+input[type=time]{
+filter: invert(1);
+background-color: black;
+border: rgba(234, 234, 234, 0.141) 1px solid;
+cursor: text;
+
+} input[type=time]:last-child {
+  color:rgb(175, 175, 175);
+}
+input[type="datetime-local"] {
+cursor: text;
+
+}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+
+filter: invert(1);
+}
 
 a li i:hover {
   color: transparent;
@@ -34,33 +56,6 @@ li {
   user-select: none;
 }
 
-* {
-  overflow-x: none;
-
-}
-
-
-.write-notes {
-
-  animation: cssAnimation 1.2s ease-in;
-  animation-iteration-count: 1;
-}
-
-@keyframes cssAnimation {
-  0% {
-    transform: translate(0px)
-  }
-
-  10% {
-    transform: translate(-50px)
-  }
-
-
-  100% {
-    transform: translateX(200%)
-  }
-}
-
 .note {
   width: 120px;
   height: 120px;
@@ -75,7 +70,6 @@ li {
   z-index: -1;
   user-select: none;
 }
-
 
 .note:nth-child(2) {
   background-color: #a5ffd6;
@@ -107,8 +101,6 @@ li {
   animation-delay: 10s;
 }
 
-
-
 .btn-grad {
   background-image: linear-gradient(to right, #00ddff 0%, #d300de 51%, #d9ff00 80%, #05cf34 100%)
 }
@@ -133,6 +125,17 @@ li {
   cursor: pointer;
 }
 
+.container-tasks {
+  animation: exitScreen 1s reverse ease-in-out;
+  animation-iteration-count: 1;
+
+}
+
+.write-notes {
+
+  animation: exitScreen 1.2s ease-in;
+  animation-iteration-count: 1;
+}
 
 /* Animations */
 
@@ -175,6 +178,21 @@ li {
   }
 }
 
+
+@keyframes exitScreen {
+  0% {
+    transform: translate(0px)
+  }
+
+  10% {
+    transform: translate(-50px)
+  }
+
+
+  100% {
+    transform: translateX(200%)
+  }
+}
 
 
 /* MEDIA QUERIES */
