@@ -13,7 +13,7 @@ const Home = () => {
        myElement.classList.add("write-notes")
 
     setTimeout(() => {
-     navigate("/create-tasks")
+     navigate("/create")
    },1000 );
   }
 

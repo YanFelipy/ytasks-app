@@ -1,22 +1,25 @@
 import Notes from "../../components/Notes.tsx";
 
 import NotesForm from "../../components/NotesForm.tsx";
-import TaskForm from "../../components/TaskForm";
+import TaskForm from "../../components/TaskForm.tsx";
 
 
-import NotesList from "../../components/NotesList";
-import TaskList from "../../components/TaskList";
+import NotesList from "../../components/NotesList.tsx";
+import TaskList from "../../components/TaskList.tsx";
 
 // import { ITask } from "../../interfaces/ITask";
 
-const CreateTask = () => {
+const Create = () => {
 
   const handleCreateTask = () => {
+        document.getElementById("lists")?.classList.add("flex-col")
     document.getElementById("form-notes-box")?.classList.add("hidden")
 document.getElementById("form-box")?.classList.remove("hidden")
   }
 
     const handleCreateNote = () => {
+      
+           document.getElementById("lists")?.classList.add("flex-col")
           document.getElementById("form-box")?.classList.add("hidden")
 document.getElementById("form-notes-box")?.classList.remove("hidden")
   }
@@ -45,20 +48,18 @@ document.getElementById("form-notes-box")?.classList.remove("hidden")
 
         </div>
 
-<div className=" flex flex-col gap-1">
+<div id="lists" className=" flex  gap-1">
 
 <div className="box-tasks-form w-2xl flex items-center  h-120 flex-col">
           <div className="tasks rounded-xl shadow-lg w-100 min-h 4 bg-white">
-            <h1 className="text-black text-2xl p-2" >Lista de tarefas</h1>
-            <TaskList textCard="Título da tarefa"  handleCreateTask={handleCreateTask}/>
+                       <TaskList textCard="Título da tarefa"  handleCreateTask={handleCreateTask}/>
           </div>
         </div>
 
         
 
-             <div className="box-anotations w-2xl flex items-center  min-h-min flex-col">
-          <div className="tasks rounded-xl  shadow-lg w-100 min-h 4 bg-white">
-            <h1 className="text-black text-2xl p-2 my-2">Anotações</h1>
+             <div className="box-notes w-2xl flex items-center  min-h flex-col">
+          <div className="tasks rounded-xl  shadow-lg w-100 min-h  bg-white">  
             <NotesList textCard="Título da anotação" handleCreateNote={handleCreateNote} />
           </div>
         </div>
@@ -73,4 +74,4 @@ document.getElementById("form-notes-box")?.classList.remove("hidden")
   );
 };
 
-export default CreateTask;
+export default Create

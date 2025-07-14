@@ -19,7 +19,7 @@ const ref = useRef<HTMLDivElement>(null)
 
   return (
     <div className="text-black  w-100 flex flex-col gap-4 w-2xl p-2 mb-5">
-
+<h1 className="text-black text-2xl p-2 my-2">Lista de Anotações</h1>
       <div ref={ref} className="task bg-orange-800 shadow-lg ">
 <div className="flex justify-around items-center min-h-20">
   <div className="flex">
