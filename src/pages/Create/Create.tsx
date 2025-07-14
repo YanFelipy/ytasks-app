@@ -7,40 +7,80 @@ import TaskForm from "../../components/TaskForm.tsx";
 import NotesList from "../../components/NotesList.tsx";
 import TaskList from "../../components/TaskList.tsx";
 
-// import { ITask } from "../../interfaces/ITask";
+ import type { ITask } from "../../interfaces/ITask";
+import { useState } from "react";
 
 const Create = () => {
 
-  const handleCreateTask = () => {
-        document.getElementById("lists")?.classList.add("flex-col")
-    document.getElementById("form-notes-box")?.classList.add("hidden")
-document.getElementById("form-box")?.classList.remove("hidden")
+  const [taskList, setTaskList] = useState<ITask[]>([])
+
+
+  // toogle create tasks
+  const toogleCreateTasks = () => {
+   const lists = document.getElementById("lists")
+const formNotes = document.getElementById("form-notes-box")
+const formTasks = document.getElementById("form-tasks-box")
+
+
+if (formTasks?.classList.value.includes("hidden")) {
+ lists?.classList.add("flex-col")
+  formNotes?.classList.add("hidden")
+  formTasks.classList.remove("hidden")
+} else {
+  formTasks?.classList.add("hidden")
+ lists?.classList.remove("flex-col")
+
+}
+
+       
   }
 
-    const handleCreateNote = () => {
-      
-           document.getElementById("lists")?.classList.add("flex-col")
-          document.getElementById("form-box")?.classList.add("hidden")
-document.getElementById("form-notes-box")?.classList.remove("hidden")
+  
+  // toogle create notes
+    const toogleCreateNotes = () => {
+       const lists = document.getElementById("lists")
+const formNotes = document.getElementById("form-notes-box")
+const formTasks = document.getElementById("form-tasks-box")
+
+
+if (formNotes?.classList.value.includes("hidden")) {
+ lists?.classList.add("flex-col")
+  formTasks?.classList.add("hidden")
+  formNotes.classList.remove("hidden")
+} else {
+  formNotes?.classList.add("hidden")
+ lists?.classList.remove("flex-col")
+
+}
+
   }
 
 
   return (
     <main className="min-h-screen flex justify-center max-w-screen ">
-      <div
-        id="Ref"
-        className="container-tasks p-5 flex my-10 mb-0 flex-row-reverse gap-10"
+      <div        id="Ref"
+        className="container-tasks p-5 flex my-10 mb-0 flex-row-reverse gap-10 "
       >
 <div className=" flex flex-col gap-1">
-        <div id="form-box" className=" form-box shadow-lg hidden rounded-xl w-120 h-min bg-white py-2 flex flex-col  items-center ">
-          <h1 className="text-black text-2xl p-2 my-7" >
+        <div id="form-tasks-box" className=" form-tasks-box shadow-lg hidden rounded-xl w-120 h-min bg-white py-2 flex flex-col  items-center ">
+         <div className="flex justify-end w-1/1 ">
+          <button className="my-2 btn-animated"onClick={toogleCreateTasks}>
+            <i className="bi bi-x-lg  text-black px-8  "></i>
+            </button>
+         </div>
+          <h1 className="text-black text-2xl p-2 mb-4 " >
             Criar uma nova tarefa
-          </h1>
-          <TaskForm btnText="Enviar tarefa" /> 
+          </h1>  
+          <TaskForm btnText="Enviar tarefa" taskList={taskList} setTaskList={setTaskList}/> 
         </div>
 
             <div id="form-notes-box" className=" form-notes-box  shadow-lg hidden rounded-xl w-120 h-min bg-white py-2 flex flex-col  items-center ">
-          <h1 className="text-black text-2xl p-2 my-7" >
+                  <div className="flex justify-end w-1/1 ">
+          <button className="my-2 btn-animated"onClick={toogleCreateTasks}>
+            <i className="bi bi-x-lg  text-black px-8  "></i>
+            </button>
+         </div>
+               <h1 className="text-black text-2xl p-2 mb-4 " >
             Criar uma nova anotação
           </h1>
           <NotesForm btnText="Enviar Nota" /> 
@@ -51,8 +91,38 @@ document.getElementById("form-notes-box")?.classList.remove("hidden")
 <div id="lists" className=" flex  gap-1">
 
 <div className="box-tasks-form w-2xl flex items-center  h-120 flex-col">
-          <div className="tasks rounded-xl shadow-lg w-100 min-h 4 bg-white">
-                       <TaskList textCard="Título da tarefa"  handleCreateTask={handleCreateTask}/>
+          <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center items-center  min-h 4 bg-white">
+             <h1 className="text-black text-2xl p-2 my-2" >Lista de tarefas</h1>
+              
+{taskList.length == 0 ? (
+<div className="flex items-center justify-center p-4">
+    <p className="text-black text-sans text-xl p-4">Você ainda não criou novas tarefas! :/ 
+      </p>
+  </div>
+)    : "" }
+      
+
+                      {taskList && taskList.map((task) => (
+               
+                         <TaskList textCard={task.nameTask} dateTask={task.date}  />
+
+  
+                      ))}
+
+            
+                  
+                  <div>
+                    
+                    <div className="flex items-center justify-center p-4">
+
+  <button onClick={toogleCreateTasks} className=" text-black">
+<i className="bi bi-pencil-square mr-2"></i>
+Criar uma nova tarefa
+  </button>
+
+                    </div>
+</div>
+
           </div>
         </div>
 
@@ -60,7 +130,7 @@ document.getElementById("form-notes-box")?.classList.remove("hidden")
 
              <div className="box-notes w-2xl flex items-center  min-h flex-col">
           <div className="tasks rounded-xl  shadow-lg w-100 min-h  bg-white">  
-            <NotesList textCard="Título da anotação" handleCreateNote={handleCreateNote} />
+            <NotesList textCard="Título da anotação" handleCreateNote={toogleCreateNotes} />
           </div>
         </div>
 

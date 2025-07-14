@@ -1,7 +1,7 @@
 export interface ITask {
 id : number, 
-taskName : string,
-difficult : number, 
+nameTask : string,
+difficulty : number, 
 date : Date
 
 }

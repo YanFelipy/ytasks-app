@@ -44,8 +44,12 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 
 filter: invert(1);
 }
+.btn-animated{
+  font-size: 1.2em;
 
-a li i:hover {
+}
+
+a li i:hover, .btn-animated:hover {
   color: transparent;
   background-image: linear-gradient(to right, #00ddff 0%, #d300de 51%, #d9ff00 80%, #05cf34 100%);
   background-clip: text;
