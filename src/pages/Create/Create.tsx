@@ -14,7 +14,7 @@ const Create = () => {
 
   const [taskList, setTaskList] = useState<ITask[]>([])
 
-
+console.log(taskList)
   // toogle create tasks
   const toogleCreateTasks = () => {
    const lists = document.getElementById("lists")
@@ -35,7 +35,9 @@ if (formTasks?.classList.value.includes("hidden")) {
        
   }
 
-  
+  // toogle more details 
+
+
   // toogle create notes
     const toogleCreateNotes = () => {
        const lists = document.getElementById("lists")
@@ -90,7 +92,7 @@ if (formNotes?.classList.value.includes("hidden")) {
 
 <div id="lists" className=" flex  gap-1">
 
-<div className="box-tasks-form w-2xl flex items-center  h-120 flex-col">
+<div className="box-tasks-form w-2xl flex items-center  min-h-120 flex-col">
           <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center items-center  min-h 4 bg-white">
              <h1 className="text-black text-2xl p-2 my-2" >Lista de tarefas</h1>
               
@@ -104,7 +106,7 @@ if (formNotes?.classList.value.includes("hidden")) {
 
                       {taskList && taskList.map((task) => (
                
-                         <TaskList textCard={task.nameTask} dateTask={task.date}  />
+                         <TaskList key={task.id} textCard={task.nameTask} dateTask={task.date} taskDifficulty={task.difficulty} taskId={task.id} />
 
   
                       ))}
