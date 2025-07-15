@@ -1,4 +1,3 @@
-  
   export const useToogle = () => {
 
   const toogleCreateTasks = () => {
@@ -36,6 +35,19 @@ if (formNotes?.classList.value.includes("hidden")) {
 }
 
   }
-return {toogleCreateTasks, toogleCreateNotes}
+
+    const ToogleMore = (taskId : number) => {
+  const taskDetails = document.getElementById( `details-${taskId}`)
+
+if(taskDetails?.classList.value.includes("hidden")){
+taskDetails.classList.remove("hidden")
+}    else if(taskDetails) {
+taskDetails.classList.add("hidden")
+    }
+
+
+  }
+
+return {toogleCreateTasks, toogleCreateNotes, ToogleMore}
   
 }

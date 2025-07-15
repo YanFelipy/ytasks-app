@@ -1,4 +1,10 @@
-import { useRef, useEffect } from "react"
+
+
+//hooks 
+import { useToogle } from "../hooks/useToogle"
+import { useSetDifficulty } from "../hooks/useSetDifficulty"
+import { useChangeColors } from "../hooks/useChangeColors"
+import { useEffect } from "react";
 
 interface Props {
   textCard : string,
@@ -9,18 +15,23 @@ interface Props {
 }
 const TaskList = ({textCard, dateTask, taskDifficulty, taskId } : Props) => {
 
-  //changing colors of notes
-const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-const ref = useRef<HTMLDivElement>(null)
-const dfElement = useRef<HTMLDivElement>(null)
+const {ToogleMore } = useToogle()
+const {setDifficulty} = useSetDifficulty()
+const {ChangeColor} = useChangeColors()
+const difficultyLevel = setDifficulty(taskDifficulty, taskId)
 
-  useEffect(() => {
-   if (ref.current)
-       ref.current.style.backgroundColor = `#${randomColor}`
-        
-     return
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+useEffect(()=>{
+  
+  
+  if (taskId){ 
+     ChangeColor(taskId)}
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[])
+
+
+  //changing colors of notes
+
 
   //formating actually date to pt-br
  const formatDate = new Intl.DateTimeFormat("pt-BR", {
@@ -34,40 +45,8 @@ console.log(formatedDate)
 
 //show more details of tasks
 
-  const ToogleMore = () => {
-  const taskDetails = document.getElementById( `details-${taskId}`)
-
-if(taskDetails?.classList.value.includes("hidden")){
-taskDetails.classList.remove("hidden")
-}    else if(taskDetails) {
-taskDetails.classList.add("hidden")
-    }
-  return
-
-  }
-
-// show difficult level
-let difficultyLevel = ""
 
 
-
-if (taskDifficulty > 8 && dfElement.current) {
-difficultyLevel = "(Muito difícil)"
-dfElement?.current.classList.add("text-red-500")
-} 
- else if (taskDifficulty > 5 && dfElement.current) {
-  difficultyLevel = "(difícil)"
-dfElement?.current.classList.add("text-orange-400")
-}
-
- else if (taskDifficulty > 3 && dfElement.current) {
-  difficultyLevel = "(Normal)"
-dfElement?.current.classList.add("text-yellow-400")
-} 
- else if( taskDifficulty < 3 && dfElement.current ){
-  difficultyLevel = "(Fácil)"
-dfElement?.current.classList.add("text-green-400")
-} 
 
 
 
@@ -77,7 +56,7 @@ dfElement?.current.classList.add("text-green-400")
     <div className="text-black  w-100 flex flex-col gap-4 w-2xl p-2 mb-2">
 
 
-      <div ref={ref}  id="task" className="task   justify-center flex-col shadow-lg ">
+      <div   id={`divChangeColor-${taskId}`}  className="task   justify-center flex-col shadow-lg ">
        
 <div className="flex justify-around items-center min-h-15">
   
@@ -92,7 +71,7 @@ dfElement?.current.classList.add("text-green-400")
   
 
 
-  <button className="text-white text-shadow-lg " onClick={ToogleMore}>
+  <button className="text-white text-shadow-lg " onClick={()=>{ToogleMore(taskId)}}>
   Ver mais
 <i className=" ml-2 bi bi-chevron-down text-white text-shadow-lg">
 
@@ -107,7 +86,7 @@ dfElement?.current.classList.add("text-green-400")
   {taskDifficulty}  
     </span>
   </p>
-  <p ref={dfElement}  className=" text-shadow-lg font-bold">
+  <p id={`difficultyName-${taskId}`}   className=" text-shadow-lg font-bold">
     {difficultyLevel}
     </p> 
   </div>
