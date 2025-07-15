@@ -1,62 +1,25 @@
+// Components
 import Notes from "../../components/Notes.tsx";
 
+//Forms and lists
 import NotesForm from "../../components/NotesForm.tsx";
 import TaskForm from "../../components/TaskForm.tsx";
-
-
 import NotesList from "../../components/NotesList.tsx";
 import TaskList from "../../components/TaskList.tsx";
 
+//Interfaces
  import type { ITask } from "../../interfaces/ITask";
-import { useState } from "react";
+
+ // Hooks
+ import { useState } from "react";
+import { useToogle } from "../../hooks/useToogle.tsx";
 
 const Create = () => {
 
   const [taskList, setTaskList] = useState<ITask[]>([])
+  const {toogleCreateTasks, toogleCreateNotes} = useToogle()
 
 console.log(taskList)
-  // toogle create tasks
-  const toogleCreateTasks = () => {
-   const lists = document.getElementById("lists")
-const formNotes = document.getElementById("form-notes-box")
-const formTasks = document.getElementById("form-tasks-box")
-
-
-if (formTasks?.classList.value.includes("hidden")) {
- lists?.classList.add("flex-col")
-  formNotes?.classList.add("hidden")
-  formTasks.classList.remove("hidden")
-} else {
-  formTasks?.classList.add("hidden")
- lists?.classList.remove("flex-col")
-
-}
-
-       
-  }
-
-  // toogle more details 
-
-
-  // toogle create notes
-    const toogleCreateNotes = () => {
-       const lists = document.getElementById("lists")
-const formNotes = document.getElementById("form-notes-box")
-const formTasks = document.getElementById("form-tasks-box")
-
-
-if (formNotes?.classList.value.includes("hidden")) {
- lists?.classList.add("flex-col")
-  formTasks?.classList.add("hidden")
-  formNotes.classList.remove("hidden")
-} else {
-  formNotes?.classList.add("hidden")
- lists?.classList.remove("flex-col")
-
-}
-
-  }
-
 
   return (
     <main className="min-h-screen flex justify-center max-w-screen ">

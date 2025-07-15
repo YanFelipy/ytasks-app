@@ -7,6 +7,9 @@ import {
 //interfaces
 import type { ITask } from "../interfaces/ITask.tsx";
 
+//hooks
+import {useToogle} from '../hooks/useToogle.tsx'
+
 interface Props {
   btnText: string;
   taskList: ITask[];
@@ -14,6 +17,8 @@ interface Props {
 }
 
 const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
+
+const {toogleCreateTasks } = useToogle()
 
   //states
   const [id, setId] = useState<number>(0);
@@ -63,7 +68,7 @@ const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
     setDate(new Date())
 
 
-    
+    toogleCreateTasks()
     
     console.log(taskList)
     
