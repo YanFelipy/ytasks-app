@@ -4,10 +4,7 @@ import RoutePages from '../src/routes/Routes.tsx'
 
 // components
 import Header from './components/Header'
-import Footer from './components/footer.tsx'
-
-
-
+import Footer from './components/Footer.tsx'
 
 function App() {
 
