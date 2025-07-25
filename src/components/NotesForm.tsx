@@ -70,10 +70,14 @@ const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
       setNotesList!([...notesList, newNote]);
 
       setError("");
-
-          toogleCreateNotes()
+    setNameNote("")
+    setNote("")
+    
+     toogleCreateNotes()
+   
+     console.log(noteDate);
     }
-    console.log(noteDate);
+    
   };
 
   return (
@@ -84,10 +88,10 @@ const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
       <label className="flex flex-col items-start w-65">
         <span className="mb-2">Título da anotação</span>
         <input
-          required
+          required maxLength={18}
           name="nameNote"
           onChange={onInputChange}
-          placeholder="Insira sua anotação"
+          placeholder="Insira sua anotação (max. 18 char.)"
           className="block min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400 w-60"
           type="text"
         />
@@ -100,7 +104,7 @@ const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
           name="bodyNote"
           onChange={onInputChange}
           className="block  min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400  w-100"
-          placeholder="Max 200 caracteres. "
+          placeholder="Max: 200 caracteres. "
           minLength={5}
           maxLength={200}
           rows={4}

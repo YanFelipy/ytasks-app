@@ -60,7 +60,9 @@ console.log(notesList)
 
 <div className="box-tasks-form w-2xl flex items-center  min-h-120 flex-col">
           <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center mb-30 items-center  min-h 4 bg-white">
-             <h1 className="text-black text-2xl p-2 my-2" >Lista de tarefas</h1>
+             <h1 className="text-black text-2xl p-2 my-2" >
+              <i className="tasks-icon bi bi-clipboard2-check mr-2">
+                </i>Lista de tarefas</h1>
               
 {taskList.length == 0 ? (
 <div className="flex items-center justify-center p-4">
@@ -83,7 +85,7 @@ console.log(notesList)
                     
                     <div className="flex items-center justify-center p-4">
 
-  <button onClick={toogleCreateTasks} className=" text-black">
+  <button onClick={toogleCreateTasks} className="newTaskBtn text-black">
 <i className="bi bi-pencil-square mr-2"></i>
 Criar uma nova tarefa
   </button>
@@ -97,7 +99,8 @@ Criar uma nova tarefa
         
    <div className="box-notes w-2xl flex items-center  min-h-120 flex-col">
           <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center mb-30 items-center  min-h 4 bg-white">
-             <h1 className="text-black text-2xl p-2 my-2" >Lista de Anotações</h1>
+             <h1 className="text-black text-2xl p-2 my-2" >
+              <i className="notes-icon bi bi-journal-text mr-2"></i>Lista de Anotações</h1>
               
 {notesList.length == 0 ? (
 <div className="flex items-center justify-center p-4">
@@ -120,7 +123,7 @@ Criar uma nova tarefa
                     
                     <div className="flex items-center justify-center p-4">
 
-  <button onClick={toogleCreateNotes} className=" text-black">
+  <button onClick={toogleCreateNotes} className="newNoteBtn text-black">
 <i className="bi bi-pencil-square mr-2"></i>
 Criar uma nova anotação
   </button>

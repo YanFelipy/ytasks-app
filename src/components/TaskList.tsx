@@ -4,8 +4,9 @@
 import { useToogle } from "../hooks/useToogle"
 import { useSetDifficulty } from "../hooks/useSetDifficulty"
 import { useChangeColors } from "../hooks/useChangeColors"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormatDate } from "../hooks/useFormatDate";
+import DropMenu from "./DropMenu";
 
 interface Props {
   textCard : string,
@@ -16,6 +17,9 @@ interface Props {
 }
 const TaskList = ({textCard, dateTask, taskDifficulty, taskId } : Props) => {
 
+  //states 
+  const [difficultyLevel, setDifficultyLevel] = useState<string>("")
+
 //des. hooks
 const {ToogleMore } = useToogle()
 const {setDifficulty} = useSetDifficulty()
@@ -23,14 +27,17 @@ const {ChangeColor} = useChangeColors()
  const {formatDate } = useFormatDate()
 
  //setting lvls of difficult for display in card
-const difficultyLevel = setDifficulty(taskDifficulty, taskId)
 
-  //changing colors of notes
-useEffect(()=>{
 
-  if (taskId){ 
+ 
+ //changing colors of notes
+ useEffect(()=>{
+   
+   if (taskId){ 
      ChangeColor(taskId)}
+  setDifficultyLevel(setDifficulty(taskDifficulty, taskId))
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
 
   //formating actually date to pt-br
@@ -44,7 +51,7 @@ useEffect(()=>{
 
       <div   id={`divChangeColor-${taskId}`}  className="task   justify-center flex-col shadow-lg ">
        
-<div className="flex justify-around items-center min-h-15">
+<div className="flex justify-between px-4 items-center min-h-15 ">
   
   <div className="flex">
 
@@ -55,14 +62,22 @@ useEffect(()=>{
 
   </div>
   
+<div className="buttons w-1/2 flex justify-end gap-3">
+  
 
-
-  <button className="text-white text-shadow-lg " onClick={()=>{ToogleMore(taskId)}}>
-  Ver mais
-<i className=" ml-2 bi bi-chevron-down text-white text-shadow-lg">
-
-  </i> 
+<div className="text-white ">
+      <button className="inline-flex w-full justify-center rounded-md  px-4 py-2 text-sm font-semibold text-white shadow-xs hover:ring-1  hover:ring-1-inset " onClick={()=>{ToogleMore(taskId)}}>
+<i className=" bi bi-chevron-down text-white text-shadow-lg">  </i> 
   </button>
+
+    </div>
+  <div className="text-white">
+    <DropMenu />
+    </div>
+
+</div>
+
+
 </div>
 
    <div id={`details-${taskId}`}className=" flex  text-sm/7 flex-col  items-start p-4 text-white  ">

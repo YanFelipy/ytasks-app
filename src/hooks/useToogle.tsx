@@ -41,6 +41,7 @@ if (formNotes?.classList.value.includes("hidden")) {
 
 if(taskDetails?.classList.value.includes("hidden")){
 taskDetails.classList.remove("hidden")
+taskDetails.classList.add("border-t")
 }    else if(taskDetails) {
 taskDetails.classList.add("hidden")
     }

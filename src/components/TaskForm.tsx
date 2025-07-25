@@ -87,9 +87,10 @@ const [date, setDate] = useState<string>("");
         <span className="mb-2">O que você vai fazer?</span>
         <input
           value={nameTask}
+          maxLength={20}
           name="nameTask"
           onChange={onInputChange}
-          placeholder="Insira sua tarefa"
+          placeholder="Insira sua tarefa (max. 20 char.) "
           className="block min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400 w-60"
           type="text"
         />

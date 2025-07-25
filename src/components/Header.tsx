@@ -4,14 +4,16 @@ import { Link } from "react-router";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-evenly bg-white min-h-20 shadow-md">
+    <header className="flex items-center justify-center bg-white min-h-20 shadow-md">
+
+    <nav className="flex items-center justify-between w-3/6">
       <div className="w-15">
           <Link to="/">
         <img src={Logo} />
           </Link>
       </div>
-      <nav className="flex items-center justify-evenly">
-        <ul className="flex font-sans row items-center justify-evenly">
+
+ <ul className="flex font-sans row items-center justify-evenly">
 
           <Link to="/">
           <li className=" flex items-center text-black">
@@ -28,8 +30,13 @@ const Header = () => {
           </li>
                     </Link>
         </ul>
+
+
       </nav>
-    </header>
+
+      
+       
+      </header>
   );
 };
 

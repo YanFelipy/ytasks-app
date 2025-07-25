@@ -18,6 +18,8 @@
 
 }
 
+
+
 textarea {
   resize: none;
 }
@@ -26,6 +28,19 @@ button {
   cursor: pointer;
 }
 
+.newNoteBtn:hover, .newTaskBtn:hover {
+  color: transparent;
+  background-image: linear-gradient(to right, #00ddff 0%, #d300de 51%, #d9ff00 80%, #05cf34 100%);
+  background-clip: text;
+}
+
+.notes-icon, .tasks-icon {
+animation: bipColors 15s ease infinite;
+animation-delay: 2s;
+}
+input[type="checkbox"] {
+  width: 16px; /* Adjust size */
+}
 
 input[type=time]{
 filter: invert(1);
@@ -147,6 +162,22 @@ li {
 }
 
 /* Animations */
+
+@keyframes bipColors {
+0%{
+
+}
+
+50% {
+  color: transparent;
+  background-image: linear-gradient(to right, #00ddff 0%, #d300de 51%, #d9ff00 80%, #05cf34 100%);
+  background-clip: text;
+}
+
+100% {
+  
+}
+}
 
 @keyframes bounceImage {
   0% {
