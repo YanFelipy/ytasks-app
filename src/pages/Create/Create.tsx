@@ -56,7 +56,7 @@ console.log(taskList)
 <div id="lists" className=" flex  gap-1">
 
 <div className="box-tasks-form w-2xl flex items-center  min-h-120 flex-col">
-          <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center items-center  min-h 4 bg-white">
+          <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center mb-30 items-center  min-h 4 bg-white">
              <h1 className="text-black text-2xl p-2 my-2" >Lista de tarefas</h1>
               
 {taskList.length == 0 ? (

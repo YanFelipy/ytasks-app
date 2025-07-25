@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 interface Props {
   textCard : string,
-  dateTask : Date,
+  dateTask : string,
   taskDifficulty : number,
  taskId : number;
   
@@ -18,20 +18,16 @@ const TaskList = ({textCard, dateTask, taskDifficulty, taskId } : Props) => {
 const {ToogleMore } = useToogle()
 const {setDifficulty} = useSetDifficulty()
 const {ChangeColor} = useChangeColors()
+
 const difficultyLevel = setDifficulty(taskDifficulty, taskId)
 
+  //changing colors of notes
 useEffect(()=>{
-  
-  
+
   if (taskId){ 
      ChangeColor(taskId)}
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
-
-
-  //changing colors of notes
-
 
   //formating actually date to pt-br
  const formatDate = new Intl.DateTimeFormat("pt-BR", {
@@ -39,16 +35,8 @@ useEffect(()=>{
     timeStyle: "short",
     timeZone: "America/Sao_Paulo",
   });
-
-  const formatedDate = formatDate.format(dateTask).toString()
-console.log(formatedDate)
-
-//show more details of tasks
-
-
-
-
-
+    const dateObject = new Date(dateTask)
+  const formatedDate = formatDate.format(dateObject).toString()
 
 
 

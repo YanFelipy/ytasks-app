@@ -17,15 +17,16 @@ interface Props {
 }
 
 const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
+  
 
 const {toogleCreateTasks } = useToogle()
 
-  //states
-  const [id, setId] = useState<number>(0);
-  const [error, setError] = useState<string>("");
-  const [nameTask, setNameTask] = useState<string>("");
-  const [difficulty, setDifficulty] = useState<number>(0);
-  const [date, setDate] = useState<Date>(new Date());
+//states
+const [id, setId] = useState<number>(0);
+const [error, setError] = useState<string>("");
+const [nameTask, setNameTask] = useState<string>("");
+const [difficulty, setDifficulty] = useState<number>(0);
+const [date, setDate] = useState<string>("");
 
 
   const formatDate = new Intl.DateTimeFormat("pt-BR", {
@@ -35,22 +36,30 @@ const {toogleCreateTasks } = useToogle()
   });
 
   const now = formatDate.format(new Date());
+ 
 
   //events
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+
     if (e.target.name == "nameTask") {
       setNameTask(e.target.value);
     } else if (e.target.name == "difficulty") {
       setDifficulty(e.target.valueAsNumber);
     } else {
-      setDate(new Date(e.target.value));
+  
+      setDate( e.target.value
+      )
     }
   };
 
+
+  //SUBMITING FORM
   const submitCreateTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const selectedDate = formatDate.format(date);
+    const dateObject = new Date(date)
+    const selectedDate = formatDate.format(dateObject);
+    console.log(selectedDate)
   
     if (selectedDate < now) {
       console.log("Data menor que a de hoje");
@@ -65,7 +74,7 @@ const {toogleCreateTasks } = useToogle()
     
     setNameTask("")
     setDifficulty(0)
-    setDate(new Date())
+    setDate("")
 
 
     toogleCreateTasks()
@@ -110,7 +119,7 @@ const {toogleCreateTasks } = useToogle()
         <label className="flex flex-col items-start w-60">
           <span className="mb-2">Data e horário :</span>
           <input 
-            value={date.toISOString().slice(0, 16)}
+            value={date}
             name="date"
             onChange={onInputChange}
             className="block min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400  w-50 "
