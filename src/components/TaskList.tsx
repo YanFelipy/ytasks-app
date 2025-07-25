@@ -5,6 +5,7 @@ import { useToogle } from "../hooks/useToogle"
 import { useSetDifficulty } from "../hooks/useSetDifficulty"
 import { useChangeColors } from "../hooks/useChangeColors"
 import { useEffect } from "react";
+import { useFormatDate } from "../hooks/useFormatDate";
 
 interface Props {
   textCard : string,
@@ -15,10 +16,13 @@ interface Props {
 }
 const TaskList = ({textCard, dateTask, taskDifficulty, taskId } : Props) => {
 
+//des. hooks
 const {ToogleMore } = useToogle()
 const {setDifficulty} = useSetDifficulty()
 const {ChangeColor} = useChangeColors()
+ const {formatDate } = useFormatDate()
 
+ //setting lvls of difficult for display in card
 const difficultyLevel = setDifficulty(taskDifficulty, taskId)
 
   //changing colors of notes
@@ -30,14 +34,8 @@ useEffect(()=>{
 },[])
 
   //formating actually date to pt-br
- const formatDate = new Intl.DateTimeFormat("pt-BR", {
-    dateStyle: "short",
-    timeStyle: "short",
-    timeZone: "America/Sao_Paulo",
-  });
     const dateObject = new Date(dateTask)
   const formatedDate = formatDate.format(dateObject).toString()
-
 
 
   return (
@@ -81,6 +79,7 @@ useEffect(()=>{
 
     <span className="  text-shadow-lg">   <i className=" text-shadow-lg bi bi-calendar-check mr-2"></i>{formatedDate}</span>
     </div>
+    
       </div>
 
        

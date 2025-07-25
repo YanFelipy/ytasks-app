@@ -9,6 +9,7 @@ import type { ITask } from "../interfaces/ITask.tsx";
 
 //hooks
 import {useToogle} from '../hooks/useToogle.tsx'
+import { useFormatDate } from "../hooks/useFormatDate.tsx";
 
 interface Props {
   btnText: string;
@@ -18,7 +19,8 @@ interface Props {
 
 const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
   
-
+//des. hooks
+const {formatDate } = useFormatDate()
 const {toogleCreateTasks } = useToogle()
 
 //states
@@ -27,13 +29,6 @@ const [error, setError] = useState<string>("");
 const [nameTask, setNameTask] = useState<string>("");
 const [difficulty, setDifficulty] = useState<number>(0);
 const [date, setDate] = useState<string>("");
-
-
-  const formatDate = new Intl.DateTimeFormat("pt-BR", {
-    dateStyle: "short",
-    timeStyle: "short",
-    timeZone: "America/Sao_Paulo",
-  });
 
   const now = formatDate.format(new Date());
  
@@ -52,8 +47,7 @@ const [date, setDate] = useState<string>("");
     }
   };
 
-
-  //SUBMITING FORM
+  //submiting-form
   const submitCreateTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

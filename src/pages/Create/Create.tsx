@@ -9,6 +9,7 @@ import TaskList from "../../components/TaskList.tsx";
 
 //Interfaces
  import type { ITask } from "../../interfaces/ITask";
+ import type { INotes } from "../../interfaces/INotes.ts";
 
  // Hooks
  import { useState } from "react";
@@ -17,15 +18,17 @@ import { useToogle } from "../../hooks/useToogle.tsx";
 const Create = () => {
 
   const [taskList, setTaskList] = useState<ITask[]>([])
+    const [notesList, setNotesList] = useState<INotes[]>([])
   const {toogleCreateTasks, toogleCreateNotes} = useToogle()
 
-console.log(taskList)
+console.log(notesList)
 
   return (
     <main className="min-h-screen flex justify-center max-w-screen ">
       <div        id="Ref"
         className="container-tasks p-5 flex my-10 mb-0 flex-row-reverse gap-10 "
       >
+        
 <div className=" flex flex-col gap-1">
         <div id="form-tasks-box" className=" form-tasks-box shadow-lg hidden rounded-xl w-120 h-min bg-white py-2 flex flex-col  items-center ">
          <div className="flex justify-end w-1/1 ">
@@ -48,7 +51,7 @@ console.log(taskList)
                <h1 className="text-black text-2xl p-2 mb-4 " >
             Criar uma nova anotação
           </h1>
-          <NotesForm btnText="Enviar Nota" /> 
+          <NotesForm setNotesList={setNotesList} notesList={notesList} btnText="Enviar Nota" /> 
         </div>
 
         </div>
@@ -92,12 +95,44 @@ Criar uma nova tarefa
         </div>
 
         
+   <div className="box-notes w-2xl flex items-center  min-h-120 flex-col">
+          <div className="tasks rounded-xl shadow-lg w-120 flex flex-col justify-center mb-30 items-center  min-h 4 bg-white">
+             <h1 className="text-black text-2xl p-2 my-2" >Lista de Anotações</h1>
+              
+{notesList.length == 0 ? (
+<div className="flex items-center justify-center p-4">
+    <p className="text-black text-sans text-xl p-4">Você ainda não criou novas anotações! :/ 
+      </p>
+  </div>
+)    : "" }
+      
 
-             <div className="box-notes w-2xl flex items-center  min-h flex-col">
-          <div className="tasks rounded-xl  shadow-lg w-100 min-h  bg-white">  
-            <NotesList textCard="Título da anotação" handleCreateNote={toogleCreateNotes} />
+                      {notesList && notesList.map((note) => (
+               
+                         <NotesList key={note.id} textCard={note.noteName} note={note.note} dateNote={note.noteDate} noteId={note.id} />
+
+  
+                      ))}
+
+            
+                  
+                  <div>
+                    
+                    <div className="flex items-center justify-center p-4">
+
+  <button onClick={toogleCreateNotes} className=" text-black">
+<i className="bi bi-pencil-square mr-2"></i>
+Criar uma nova anotação
+  </button>
+
+                    </div>
+</div>
+
           </div>
         </div>
+     
+
+       
 
 </div>
         
