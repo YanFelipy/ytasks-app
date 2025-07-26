@@ -8,14 +8,18 @@ import { useEffect, useState } from "react";
 import { useFormatDate } from "../hooks/useFormatDate";
 import DropMenu from "./DropMenu";
 
+import type { ITask } from "../interfaces/ITask";
+
 interface Props {
   textCard : string,
   dateTask : string,
   taskDifficulty : number,
  taskId : number;
+  taskList: ITask[];
+  setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
   
 }
-const TaskList = ({textCard, dateTask, taskDifficulty, taskId } : Props) => {
+const TaskList = ({textCard, dateTask, taskDifficulty, taskId, taskList, setTaskList  } : Props) => {
 
   //states 
   const [difficultyLevel, setDifficultyLevel] = useState<string>("")
@@ -26,10 +30,6 @@ const {setDifficulty} = useSetDifficulty()
 const {ChangeColor} = useChangeColors()
  const {formatDate } = useFormatDate()
 
- //setting lvls of difficult for display in card
-
-
- 
  //changing colors of notes
  useEffect(()=>{
    
@@ -43,6 +43,22 @@ const {ChangeColor} = useChangeColors()
   //formating actually date to pt-br
     const dateObject = new Date(dateTask)
   const formatedDate = formatDate.format(dateObject).toString()
+
+  //deleting task
+  const handleDeleteTask = (id : number) => {
+
+if(taskList){
+setTaskList(
+  taskList.filter((task)=>{
+    return task.id !== id
+  } )
+)
+
+}
+}
+
+
+  
 
 
   return (
@@ -72,7 +88,7 @@ const {ChangeColor} = useChangeColors()
 
     </div>
   <div className="text-white">
-    <DropMenu />
+    <DropMenu handleDelete={() => {handleDeleteTask(taskId)}} />
     </div>
 
 </div>

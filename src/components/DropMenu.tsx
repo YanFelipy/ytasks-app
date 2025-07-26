@@ -1,7 +1,11 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 //import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-export default function DropMenu() {
+interface Props  {
+handleDelete :   React.MouseEventHandler<HTMLButtonElement>; 
+}
+
+const DropMenu = ({handleDelete} : Props) => {
   return (
     <Menu as="div" className="relative inline-block">
       <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-xs hover:ring-1  hover:ring-1-inset ">
@@ -23,7 +27,7 @@ export default function DropMenu() {
           </MenuItem>
  
        <MenuItem>
-            <button 
+            <button onClick={handleDelete}
               className="w-full block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
             ><i className="bi bi-trash text-red-500 mr-2"></i>
               Deletar
@@ -35,3 +39,4 @@ export default function DropMenu() {
     </Menu>
   )
 }
+export default DropMenu;

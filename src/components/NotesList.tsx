@@ -5,16 +5,20 @@ import DropMenu from '../components/DropMenu'
 import { useToogle } from "../hooks/useToogle"
 import { useChangeColors } from "../hooks/useChangeColors"
 
+//interfaces
+import type{ INotes } from "../interfaces/INotes"
 
 interface Props {
   textCard : string;
  noteId : number;
  dateNote : string;
  note : string;
+   notesList: INotes[];
+   setNotesList: React.Dispatch<React.SetStateAction<INotes[]>>;
 }
 
 
-const NotesList = ({textCard, noteId, note, dateNote } : Props) => {
+const NotesList = ({textCard, noteId, note, dateNote, notesList, setNotesList } : Props) => {
 
 const {ToogleMore } = useToogle()
 const {ChangeColor} = useChangeColors()
@@ -28,6 +32,20 @@ useEffect(()=>{
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
+
+ //deleting notes
+  const handleDeleteNotes = (id : number) => {
+
+if(notesList){
+setNotesList(
+  notesList.filter((note)=>{
+    return note.id !== id
+  } )
+)
+
+}
+}
+
 
 
   return (
@@ -53,7 +71,7 @@ useEffect(()=>{
 
     </div>
   <div className="text-white">
-    <DropMenu />
+    <DropMenu handleDelete={( ) => {handleDeleteNotes(noteId)}} />
     </div>
 
 </div>

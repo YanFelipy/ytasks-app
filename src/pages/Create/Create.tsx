@@ -94,6 +94,8 @@ const Create = () => {
                     dateTask={task.date}
                     taskDifficulty={task.difficulty}
                     taskId={task.id}
+                    taskList={taskList}
+                    setTaskList={setTaskList}
                   />
                 ))}
 
@@ -136,6 +138,9 @@ const Create = () => {
                     note={note.note}
                     dateNote={note.noteDate}
                     noteId={note.id}
+                    notesList={notesList}
+                    setNotesList={setNotesList}
+                   
                   />
                 ))}
 
