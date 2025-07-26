@@ -18,66 +18,55 @@ interface Props {
 }
 
 const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
-  
   //des hooks
   const { formatDate } = useFormatDate();
-  const {toogleCreateNotes } = useToogle()
-  
+  const { toogleCreateNotes } = useToogle();
+
   //states
-  const [id, setId] = useState<number>(0);
+  // const [id, setId] = useState<number>(0);
   const [error, setError] = useState<string>("");
   const [noteName, setNameNote] = useState<string>("");
   const [note, setNote] = useState<string>("");
   const [noteDate, setNoteDate] = useState<string>("");
-  
+
   //formating date
   const now = formatDate.format(new Date());
 
   useEffect(() => {
-    setNoteDate(now)
-  },[now])
-  console.log(noteDate)
-  
+    setNoteDate(now);
+  }, [now]);
+
   //events
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     if (e.target.name == "nameNote") {
       setNameNote(e.target.value);
-    } else  {
+    } else {
       setNote(e.target.value);
     }
-   
   };
-  
+
   //submting form
   const submitCreateNote = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
-    
+
     if (note.length < 5) {
       setError("Insira pelomenos uma palavra");
-      console.log(error);
     } else if (noteName.length < 4) {
       setError("Insira uma palavra com pelomenos 4 letras no campo de título");
-      console.log(error);
     } else {
-      
-
       const id = Math.floor(Math.random() * 1000);
       const newNote: INotes = { id, noteName, note, noteDate };
 
       setNotesList!([...notesList, newNote]);
 
       setError("");
-    setNameNote("")
-    setNote("")
-    
-     toogleCreateNotes()
-   
-     console.log(noteDate);
+      setNameNote("");
+      setNote("");
+
+      toogleCreateNotes();
     }
-    
   };
 
   return (
@@ -88,7 +77,8 @@ const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
       <label className="flex flex-col items-start w-65">
         <span className="mb-2">Título da anotação</span>
         <input
-          required maxLength={18}
+          required
+          maxLength={18}
           name="nameNote"
           onChange={onInputChange}
           placeholder="Insira sua anotação (max. 18 char.)"

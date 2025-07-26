@@ -4,13 +4,12 @@ import {
   type FormEvent /* type useEffect  */,
 } from "react";
 
-//interfaces
-import type { ITask } from "../interfaces/ITask.tsx";
-
 //hooks
-import {useToogle} from '../hooks/useToogle.tsx'
+import { useToogle } from "../hooks/useToogle.tsx";
 import { useFormatDate } from "../hooks/useFormatDate.tsx";
 
+//interfaces
+import type { ITask } from "../interfaces/ITask.tsx";
 interface Props {
   btnText: string;
   taskList: ITask[];
@@ -18,31 +17,27 @@ interface Props {
 }
 
 const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
-  
-//des. hooks
-const {formatDate } = useFormatDate()
-const {toogleCreateTasks } = useToogle()
+  //des. hooks
+  const { formatDate } = useFormatDate();
+  const { toogleCreateTasks } = useToogle();
 
-//states
-const [id, setId] = useState<number>(0);
-const [error, setError] = useState<string>("");
-const [nameTask, setNameTask] = useState<string>("");
-const [difficulty, setDifficulty] = useState<number>(0);
-const [date, setDate] = useState<string>("");
+  //states
+  // const [id, setId] = useState<number>(0);
+  const [error, setError] = useState<string>("");
+  const [nameTask, setNameTask] = useState<string>("");
+  const [difficulty, setDifficulty] = useState<number>(0);
+  const [date, setDate] = useState<string>("");
 
   const now = formatDate.format(new Date());
- 
 
   //events
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-
     if (e.target.name == "nameTask") {
       setNameTask(e.target.value);
     } else if (e.target.name == "difficulty") {
       setDifficulty(e.target.valueAsNumber);
     } else {
-  
-      setDate( e.target.value)
+      setDate(e.target.value);
     }
   };
 
@@ -50,32 +45,26 @@ const [date, setDate] = useState<string>("");
   const submitCreateTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const dateObject = new Date(date)
+    const dateObject = new Date(date);
     const selectedDate = formatDate.format(dateObject);
-    console.log(selectedDate)
-  
+
     if (selectedDate < now) {
-      console.log("Data menor que a de hoje");
       setError("Data inválida, insira uma data maior que a de hoje!");
     } else {
-        setError("");
-  
-        const id = Math.floor(Math.random() *1000)
-         const newTask : ITask = {id, nameTask, difficulty, date}
+      setError("");
 
-    setTaskList!([...taskList, newTask])
-    
-    setNameTask("")
-    setDifficulty(0)
-    setDate("")
+      const id = Math.floor(Math.random() * 1000);
+      const newTask: ITask = { id, nameTask, difficulty, date };
 
+      setTaskList!([...taskList, newTask]);
 
-    toogleCreateTasks()
-    
-    console.log(taskList)
-    
-  }
-};
+      setNameTask("");
+      setDifficulty(0);
+      setDate("");
+
+      toogleCreateTasks();
+    }
+  };
 
   return (
     <form
@@ -86,8 +75,8 @@ const [date, setDate] = useState<string>("");
         <span className="mb-2">O que você vai fazer?</span>
         <input
           value={nameTask}
-         required
-         minLength={5}
+          required
+          minLength={5}
           maxLength={20}
           name="nameTask"
           onChange={onInputChange}
@@ -114,14 +103,13 @@ const [date, setDate] = useState<string>("");
       <div className="flex gap-1">
         <label className="flex flex-col items-start w-60">
           <span className="mb-2">Data e horário :</span>
-          <input 
+          <input
             value={date}
             required
-  
             name="date"
             onChange={onInputChange}
             className="block min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400  w-50 "
-            type="datetime-local" 
+            type="datetime-local"
           />
         </label>
       </div>

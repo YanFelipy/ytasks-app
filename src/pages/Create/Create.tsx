@@ -20,7 +20,7 @@ const Create = () => {
   const [notesList, setNotesList] = useState<INotes[]>([]);
   const { toogleCreateTasks, toogleCreateNotes } = useToogle();
 
-  console.log(notesList);
+ 
 
   return (
     <main className="min-h-screen flex justify-center max-w-screen ">

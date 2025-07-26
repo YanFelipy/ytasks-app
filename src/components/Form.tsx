@@ -1,7 +1,5 @@
 import type { ChangeEvent, SyntheticEvent } from "react";
 
-
-
 interface Props {
     btnText : string;
     onSubmit : (e: SyntheticEvent) => void;
