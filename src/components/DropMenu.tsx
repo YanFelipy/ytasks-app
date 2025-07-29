@@ -2,9 +2,10 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 interface Props  {
 handleDelete :   React.MouseEventHandler<HTMLButtonElement>; 
+toogleEdit :   React.MouseEventHandler<HTMLButtonElement>; 
 }
 
-const DropMenu = ({handleDelete} : Props) => {
+const DropMenu = ({handleDelete, toogleEdit} : Props) => {
   return (
     <Menu as="div" className="relative inline-block">
       <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-xs hover:ring-1  hover:ring-1-inset ">
@@ -18,7 +19,7 @@ const DropMenu = ({handleDelete} : Props) => {
       >
         <div className="py-1">
           <MenuItem>
-            <button 
+            <button onClick={toogleEdit}
               className="w-full  block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
             ><i className="bi bi-pencil-square  text-blue-400 mr-2"></i>
               Editar

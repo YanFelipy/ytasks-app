@@ -9,6 +9,8 @@ import DropMenu from "./DropMenu";
 
 //interfaces
 import type { ITask } from "../interfaces/ITask";
+import EditModal from "./EditModal";
+
 interface Props {
   textCard: string;
   dateTask: string;
@@ -20,6 +22,7 @@ interface Props {
 const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  setTaskList,}: Props) => {
   //states
   const [difficultyLevel, setDifficultyLevel] = useState<string>("");
+    const [open, setOpen] = useState<boolean>(false )
 
   //des. hooks
   const { ToogleMore } = useToogle();
@@ -40,6 +43,20 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  
   //formating actually date to pt-br
   const dateObject = new Date(dateTask);
   const formatedDate = formatDate.format(dateObject).toString();
+
+
+
+
+    const handleEditTask = (id: number) => {
+
+    if (taskList) {
+      setTaskList(
+        taskList.filter((task) => {
+          return task.id !== id;
+        })
+      );
+    }
+  };
 
   //deleting task
   const handleDeleteTask = (id: number) => {
@@ -79,7 +96,7 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  
               </button>
             </div>
             <div className="text-white">
-              <DropMenu
+              <DropMenu toogleEdit={() => setOpen(true)}
                 handleDelete={() => {
                   handleDeleteTask(taskId);
                 }}
@@ -112,8 +129,8 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  
           </span>
         </div>
       </div>
-
-      <div></div>
+<EditModal openModal={open} setOpen={setOpen} taskList={taskList} setTaskList={setTaskList}/>
+    
     </div>
   );
 };
