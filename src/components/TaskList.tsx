@@ -9,7 +9,7 @@ import DropMenu from "./DropMenu";
 
 //interfaces
 import type { ITask } from "../interfaces/ITask";
-import EditModal from "./EditModal";
+import EditModal from "./TaskEditModal";
 
 interface Props {
   textCard: string;

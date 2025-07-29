@@ -2,9 +2,8 @@
 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 
-import TaskForm from './TaskForm';
-
-import type { ITask } from '../interfaces/ITask';
+import NotesForm from './NotesForm';
+import type { INotes } from '../interfaces/INotes';
 
 
 export const SetToogleModal = () => {
@@ -13,11 +12,11 @@ export const SetToogleModal = () => {
 interface Props  {
 openModal : boolean;
 setOpen : React.Dispatch<React.SetStateAction<boolean>>
- taskList: ITask[];
-  setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
+notesList : INotes[];
+setNotesList: React.Dispatch<React.SetStateAction<INotes[]>>;
 }
 
-const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
+const NotesEditModal = ({openModal, notesList, setOpen, setNotesList }: Props) => {
 
   return (
     <div>
@@ -44,7 +43,7 @@ const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
                   </div>
 
                    <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
-                      Editar Tarefa
+                      Editar Anotação
                     </DialogTitle>
 
             </div>
@@ -57,9 +56,9 @@ const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
                   type="button"
                   data-autofocus
                   onClick={() => setOpen(false)}
-                  className="inline-flex  justify-center rounded-md bg-white  py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  className="inline-flex  justify-cener rounded-md bg-white   text-sm font-semibold text-gray-900 shadow-xs hover:ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 >
-              <i className="bi bi-x-lg  text-black px-4  "></i>
+              <i className="bi bi-x-lg text-black px-4 py-3 "></i>
                 </button>
               </div>
 
@@ -74,9 +73,7 @@ const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   
                     <div className="mt-2 w-full">
-
-                      <TaskForm btnText="Editar tarefa" taskList={taskList} setTaskList={setTaskList}/>
-                      
+                      <NotesForm btnText="Editar Anotação"  notesList={notesList} setNotesList={setNotesList}/>
                     </div>
                   </div>
                 </div>
@@ -89,4 +86,4 @@ const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
     </div>
   )
 } 
-export default EditModal
+export default NotesEditModal

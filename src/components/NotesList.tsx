@@ -2,10 +2,13 @@ import { useEffect } from "react";
 
 //components
 import DropMenu from "../components/DropMenu";
+import NotesEditModal from "./NotesEditModal";
+
 
 //hooks
 import { useToogle } from "../hooks/useToogle";
 import { useChangeColors } from "../hooks/useChangeColors";
+import { useState } from "react";
 
 //interfaces
 import type { INotes } from "../interfaces/INotes";
@@ -21,6 +24,10 @@ interface Props {
 const NotesList = ({  textCard,  noteId,  note,  dateNote,  notesList,  setNotesList,}: Props) => {
   const { ToogleMore } = useToogle();
   const { ChangeColor } = useChangeColors();
+
+
+  //states 
+  const [open, setOpen] = useState<boolean>(false )
 
   //changing colors of notes
   useEffect(() => {
@@ -67,7 +74,7 @@ const NotesList = ({  textCard,  noteId,  note,  dateNote,  notesList,  setNotes
               </button>
             </div>
             <div className="text-white">
-              <DropMenu
+              <DropMenu toogleEdit={() => setOpen(true)}
                 handleDelete={() => {
                   handleDeleteNotes(noteId);
                 }}
@@ -90,7 +97,7 @@ const NotesList = ({  textCard,  noteId,  note,  dateNote,  notesList,  setNotes
           </div>
         </div>
       </div>
-
+<NotesEditModal openModal={open} setOpen={setOpen} notesList={notesList} setNotesList={setNotesList}/>
       <div></div>
     </div>
   );

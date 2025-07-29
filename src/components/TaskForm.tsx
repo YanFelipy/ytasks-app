@@ -13,7 +13,7 @@ import type { ITask } from "../interfaces/ITask.tsx";
 interface Props {
   btnText: string;
   taskList: ITask[];
-  setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
+  setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
 const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
