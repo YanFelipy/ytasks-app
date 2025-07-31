@@ -96,6 +96,7 @@ const Create = () => {
                     taskId={task.id}
                     taskList={taskList}
                     setTaskList={setTaskList}
+                    task={task}
                   />
                 ))}
 

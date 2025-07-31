@@ -2,7 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 interface Props  {
 handleDelete :   React.MouseEventHandler<HTMLButtonElement>; 
-toogleEdit :   React.MouseEventHandler<HTMLButtonElement>; 
+ toogleEdit: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const DropMenu = ({handleDelete, toogleEdit} : Props) => {

@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useState,
   type ChangeEvent,
   type FormEvent /* type useEffect  */,
@@ -13,20 +14,42 @@ import type { ITask } from "../interfaces/ITask.tsx";
 interface Props {
   btnText: string;
   taskList: ITask[];
+  task?: ITask | null | undefined;
+  updateTask?(
+    id: number,
+    nameTask: string,
+    difficulty: number,
+    date: string
+  ): void;
   setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
-const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
+const TaskForm = ({
+  btnText,
+  updateTask,
+  taskList,
+  task,
+  setTaskList,
+}: Props) => {
   //des. hooks
   const { formatDate } = useFormatDate();
   const { toogleCreateTasks } = useToogle();
 
   //states
-  // const [id, setId] = useState<number>(0);
+  const [id, setId] = useState<number>(0);
   const [error, setError] = useState<string>("");
   const [nameTask, setNameTask] = useState<string>("");
   const [difficulty, setDifficulty] = useState<number>(0);
   const [date, setDate] = useState<string>("");
+
+  useEffect(() => {
+    if (task) {
+      setId(task.id);
+      setNameTask(task.nameTask);
+      setDifficulty(task.difficulty);
+      setDate(task.date);
+    }
+  }, [task]);
 
   const now = formatDate.format(new Date());
 
@@ -45,24 +68,28 @@ const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
   const submitCreateTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const dateObject = new Date(date);
-    const selectedDate = formatDate.format(dateObject);
-
-    if (selectedDate < now) {
-      setError("Data inválida, insira uma data maior que a de hoje!");
+    if (updateTask) {
+      updateTask(id, nameTask, difficulty, date);
     } else {
-      setError("");
+      const dateObject = new Date(date);
+      const selectedDate = formatDate.format(dateObject);
 
-      const id = Math.floor(Math.random() * 1000);
-      const newTask: ITask = { id, nameTask, difficulty, date };
+      if (selectedDate < now) {
+        setError("Data inválida, insira uma data maior que a de hoje!");
+      } else {
+        setError("");
 
-      setTaskList!([...taskList, newTask]);
+        const id = Math.floor(Math.random() * 1000);
+        const newTask: ITask = { id, nameTask, difficulty, date };
 
-      setNameTask("");
-      setDifficulty(0);
-      setDate("");
+        setTaskList!([...taskList, newTask]);
 
-      toogleCreateTasks();
+        setNameTask("");
+        setDifficulty(0);
+        setDate("");
+
+        toogleCreateTasks();
+      }
     }
   };
 

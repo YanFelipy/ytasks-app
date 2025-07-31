@@ -5,20 +5,17 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import TaskForm from './TaskForm';
 import type { ITask } from '../interfaces/ITask';
 
-
-
-export const SetToogleModal = () => {
-
-} 
 interface Props  {
 openModal : boolean;
-setOpen : React.Dispatch<React.SetStateAction<boolean>>
+setOpen : React.Dispatch<React.SetStateAction<boolean>> 
  taskList: ITask[];
+task?: ITask | null | undefined;
+updateTask? (id: number, nameTask: string, difficulty: number, date: string) : void;
 setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
 
 }
 
-const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
+const TaskEditModal = ({openModal, setOpen, updateTask, task, taskList, setTaskList}: Props) => {
 
   return (
     <div>
@@ -76,7 +73,7 @@ const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
                   
                     <div className="mt-2 w-full">
 
-                      <TaskForm btnText="Editar tarefa" taskList={taskList} setTaskList={setTaskList}/>
+                      <TaskForm btnText="Editar tarefa" taskList={taskList} task={task} updateTask={updateTask} setTaskList={setTaskList}/>
 
                     </div>
                   </div>
@@ -90,4 +87,4 @@ const EditModal = ({openModal, setOpen, taskList, setTaskList}: Props) => {
     </div>
   )
 } 
-export default EditModal
+export default TaskEditModal

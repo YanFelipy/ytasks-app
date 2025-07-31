@@ -98,7 +98,7 @@ const NotesList = ({  textCard,  noteId,  note,  dateNote,  notesList,  setNotes
         </div>
       </div>
 <NotesEditModal openModal={open} setOpen={setOpen} notesList={notesList} setNotesList={setNotesList}/>
-      <div></div>
+
     </div>
   );
 };

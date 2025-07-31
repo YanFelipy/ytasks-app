@@ -9,7 +9,7 @@ import DropMenu from "./DropMenu";
 
 //interfaces
 import type { ITask } from "../interfaces/ITask";
-import EditModal from "./TaskEditModal";
+import TaskEditModal from "./TaskEditModal";
 
 interface Props {
   textCard: string;
@@ -17,12 +17,14 @@ interface Props {
   taskDifficulty: number;
   taskId: number;
   taskList: ITask[];
+  task?: ITask | null | undefined;
   setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
-const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  setTaskList,}: Props) => {
+const TaskList = ({  textCard,  dateTask,  taskDifficulty,taskId, task,taskList,  setTaskList,}: Props) => {
   //states
   const [difficultyLevel, setDifficultyLevel] = useState<string>("");
     const [open, setOpen] = useState<boolean>(false )
+    const [taskToUpdate, setTaskToUpdate] = useState<ITask | null | undefined>(null)
 
   //des. hooks
   const { ToogleMore } = useToogle();
@@ -44,19 +46,21 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  
   const dateObject = new Date(dateTask);
   const formatedDate = formatDate.format(dateObject).toString();
 
-
-
-
-    const handleEditTask = (id: number) => {
-
-    if (taskList) {
-      setTaskList(
-        taskList.filter((task) => {
-          return task.id !== id;
-        })
-      );
-    }
+  const toogleEdit = (task: ITask | null | undefined) :  void => {
+    setTaskToUpdate(task)
+      setOpen(true)
   };
+
+  const updateTask = (id: number, nameTask: string, difficulty: number, date: string) => {
+
+const updatedTask: ITask = {id, nameTask, difficulty, date } 
+const updatedItems = taskList.map((task) => {
+  return task.id === updatedTask.id ? updatedTask : task
+})
+setTaskList(updatedItems)
+setOpen(false)
+
+  }
 
   //deleting task
   const handleDeleteTask = (id: number) => {
@@ -96,7 +100,7 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  
               </button>
             </div>
             <div className="text-white">
-              <DropMenu toogleEdit={() => setOpen(true)}
+              <DropMenu toogleEdit={() => toogleEdit(task)  }
                 handleDelete={() => {
                   handleDeleteTask(taskId);
                 }}
@@ -129,7 +133,7 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,  taskId,  taskList,  
           </span>
         </div>
       </div>
-<EditModal openModal={open} setOpen={setOpen} taskList={taskList} setTaskList={setTaskList}/>
+<TaskEditModal openModal={open} setOpen={setOpen} taskList={taskList} setTaskList={setTaskList} updateTask={updateTask} task={taskToUpdate} /> 
     
     </div>
   );
