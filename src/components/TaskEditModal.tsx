@@ -10,7 +10,10 @@ openModal : boolean;
 setOpen : React.Dispatch<React.SetStateAction<boolean>> 
  taskList: ITask[];
 task?: ITask | null | undefined;
-updateTask? (id: number, nameTask: string, difficulty: number, date: string) : void;
+updateTask? (id: number, 
+  nameTask: string, 
+  difficulty: number, 
+  date: string) : void;
 setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
 
 }

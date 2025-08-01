@@ -64,6 +64,7 @@ const Create = () => {
               setNotesList={setNotesList}
               notesList={notesList}
               btnText="Enviar Nota"
+           
             />
           </div>
         </div>
@@ -141,6 +142,7 @@ const Create = () => {
                     noteId={note.id}
                     notesList={notesList}
                     setNotesList={setNotesList}
+                    annotation={note}
                    
                   />
                 ))}

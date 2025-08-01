@@ -14,55 +14,78 @@ import type { INotes } from "../interfaces/INotes.ts";
 interface Props {
   btnText: string;
   notesList: INotes[];
+  annotation?: INotes | null | undefined;
   setNotesList: React.Dispatch<React.SetStateAction<INotes[]>>;
+  updateNote?(
+    id: number,
+    noteName: string,
+    note: string,
+    noteDate: string
+  ): void;
 }
 
-const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
+const NoteForm = ({
+  btnText,
+  notesList,
+  annotation,
+  updateNote,
+  setNotesList,
+}: Props) => {
   //des hooks
   const { formatDate } = useFormatDate();
   const { toogleCreateNotes } = useToogle();
 
   //states
-  // const [id, setId] = useState<number>(0);
+  const [id, setId] = useState<number>(0);
   const [error, setError] = useState<string>("");
-  const [noteName, setNameNote] = useState<string>("");
+  const [noteName, setNoteName] = useState<string>("");
   const [note, setNote] = useState<string>("");
   const [noteDate, setNoteDate] = useState<string>("");
 
   //formating date
   const now = formatDate.format(new Date());
 
-  useEffect(() => {
-    setNoteDate(now);
-  }, [now]);
-
   //events
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     if (e.target.name == "nameNote") {
-      setNameNote(e.target.value);
+      setNoteName(e.target.value);
     } else {
       setNote(e.target.value);
     }
   };
 
+  useEffect(() => {
+    if (annotation) {
+      setId(annotation.id);
+      setNoteName(annotation.noteName);
+      setNote(annotation.note);
+    }
+    setNoteDate(now);
+  }, [annotation, now]);
+  console.log(note);
   //submting form
   const submitCreateNote = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (note.length < 5) {
-      setError("Insira pelomenos uma palavra");
-    } else if (noteName.length < 4) {
-      setError("Insira uma palavra com pelomenos 4 letras no campo de título");
+    if (updateNote) {
+      updateNote(id, noteName, note, noteDate);
     } else {
+      if (note.length < 5) {
+        setError("Insira pelomenos uma palavra");
+      } else if (noteName.length < 4) {
+        setError(
+          "Insira uma palavra com pelomenos 4 letras no campo de título"
+        );
+      }
       const id = Math.floor(Math.random() * 1000);
       const newNote: INotes = { id, noteName, note, noteDate };
 
       setNotesList!([...notesList, newNote]);
 
       setError("");
-      setNameNote("");
+      setNoteName("");
       setNote("");
 
       toogleCreateNotes();
@@ -81,6 +104,7 @@ const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
           maxLength={18}
           name="nameNote"
           onChange={onInputChange}
+          value={noteName}
           placeholder="Insira sua anotação (max. 18 char.)"
           className="block min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400 w-60"
           type="text"
@@ -92,6 +116,7 @@ const NoteForm = ({ btnText, notesList, setNotesList }: Props) => {
         <textarea
           required
           name="bodyNote"
+          value={note}
           onChange={onInputChange}
           className="block  min-w-0 rounded-md grow border border-gray-900/10  py-1.5  pl-1 text-base text-gray-900 placeholder:text-gray-400 placeholder:text-gray-400  w-100"
           placeholder="Max: 200 caracteres. "

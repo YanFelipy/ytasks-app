@@ -11,12 +11,14 @@ export const SetToogleModal = () => {
 } 
 interface Props  {
 openModal : boolean;
-setOpen : React.Dispatch<React.SetStateAction<boolean>>
 notesList : INotes[];
+annotation?: INotes | null | undefined;
+setOpen : React.Dispatch<React.SetStateAction<boolean>>
+updateNote? (id: number, noteName: string, note: string, noteDate: string) : void,
 setNotesList: React.Dispatch<React.SetStateAction<INotes[]>>;
 }
 
-const NotesEditModal = ({openModal, notesList, setOpen, setNotesList }: Props) => {
+const NotesEditModal = ({openModal, notesList, annotation , updateNote, setOpen, setNotesList }: Props) => {
 
   return (
     <div>
@@ -73,7 +75,7 @@ const NotesEditModal = ({openModal, notesList, setOpen, setNotesList }: Props) =
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   
                     <div className="mt-2 w-full">
-                      <NotesForm btnText="Editar Anotação"  notesList={notesList} setNotesList={setNotesList}/>
+                      <NotesForm btnText="Editar Anotação"  notesList={notesList} setNotesList={setNotesList} annotation={annotation} updateNote={updateNote}/>
                     </div>
                   </div>
                 </div>
