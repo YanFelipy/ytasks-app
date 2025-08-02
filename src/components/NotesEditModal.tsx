@@ -14,7 +14,10 @@ openModal : boolean;
 notesList : INotes[];
 annotation?: INotes | null | undefined;
 setOpen : React.Dispatch<React.SetStateAction<boolean>>
-updateNote? (id: number, noteName: string, note: string, noteDate: string) : void,
+updateNote? (id: number, 
+  noteName: string, 
+  note: string, 
+  noteDate: string) : void,
 setNotesList: React.Dispatch<React.SetStateAction<INotes[]>>;
 }
 
