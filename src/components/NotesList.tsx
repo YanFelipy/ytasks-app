@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import DropMenu from "../components/DropMenu";
 import NotesEditModal from "./NotesEditModal";
 
-
 //hooks
 import { useToogle } from "../hooks/useToogle";
 import { useChangeColors } from "../hooks/useChangeColors";
@@ -22,14 +21,23 @@ interface Props {
   setNotesList: React.Dispatch<React.SetStateAction<INotes[]>>;
 }
 
-const NotesList = ({  textCard,  noteId,  note, annotation, dateNote,  notesList,  setNotesList,}: Props) => {
+const NotesList = ({
+  textCard,
+  noteId,
+  note,
+  annotation,
+  dateNote,
+  notesList,
+  setNotesList,
+}: Props) => {
   const { ToogleMore } = useToogle();
   const { ChangeColor } = useChangeColors();
 
-
-  //states 
-  const [open, setOpen] = useState<boolean>(false )
-  const [annotationToUpdate, setAnnotationToUpdate]  = useState<INotes | null| undefined> (null);
+  //states
+  const [open, setOpen] = useState<boolean>(false);
+  const [annotationToUpdate, setAnnotationToUpdate] = useState<
+    INotes | null | undefined
+  >(null);
 
   //changing colors of notes
   useEffect(() => {
@@ -41,22 +49,25 @@ const NotesList = ({  textCard,  noteId,  note, annotation, dateNote,  notesList
   }, []);
 
   //toogle edit modal and selecting note to update
-  const toogleEdit = (annotation: INotes | null | undefined) :  void => {
-    setAnnotationToUpdate(annotation)
-      setOpen(true)
+  const toogleEdit = (annotation: INotes | null | undefined): void => {
+    setAnnotationToUpdate(annotation);
+    setOpen(true);
   };
 
   //editing notes
-    const updateNote = (id: number, noteName: string, note: string, noteDate: string) => {
-  
-  const updatedNote: INotes = { id, noteName, note, noteDate } 
-  const updatedItems = notesList.map((note) => {
-    return note.id === updatedNote.id ? updatedNote : note
-  })
-  setNotesList(updatedItems)
-  setOpen(false)
-  
-    }
+  const updateNote = (
+    id: number,
+    noteName: string,
+    note: string,
+    noteDate: string
+  ) => {
+    const updatedNote: INotes = { id, noteName, note, noteDate };
+    const updatedItems = notesList.map((note) => {
+      return note.id === updatedNote.id ? updatedNote : note;
+    });
+    setNotesList(updatedItems);
+    setOpen(false);
+  };
 
   //deleting notes
   const handleDeleteNotes = (id: number) => {
@@ -94,7 +105,8 @@ const NotesList = ({  textCard,  noteId,  note, annotation, dateNote,  notesList
               </button>
             </div>
             <div className="text-white">
-              <DropMenu toogleEdit={() => toogleEdit(annotation)}
+              <DropMenu
+                toogleEdit={() => toogleEdit(annotation)}
                 handleDelete={() => {
                   handleDeleteNotes(noteId);
                 }}
@@ -117,8 +129,14 @@ const NotesList = ({  textCard,  noteId,  note, annotation, dateNote,  notesList
           </div>
         </div>
       </div>
-<NotesEditModal openModal={open} setOpen={setOpen} notesList={notesList} setNotesList={setNotesList} annotation={annotationToUpdate} updateNote={updateNote}/>
-
+      <NotesEditModal
+        openModal={open}
+        setOpen={setOpen}
+        notesList={notesList}
+        setNotesList={setNotesList}
+        annotation={annotationToUpdate}
+        updateNote={updateNote}
+      />
     </div>
   );
 };

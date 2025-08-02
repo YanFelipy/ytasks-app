@@ -20,11 +20,21 @@ interface Props {
   task?: ITask | null | undefined;
   setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
-const TaskList = ({  textCard,  dateTask,  taskDifficulty,taskId, task,taskList,  setTaskList,}: Props) => {
+const TaskList = ({
+  textCard,
+  dateTask,
+  taskDifficulty,
+  taskId,
+  task,
+  taskList,
+  setTaskList,
+}: Props) => {
   //states
   const [difficultyLevel, setDifficultyLevel] = useState<string>("");
-    const [open, setOpen] = useState<boolean>(false )
-    const [taskToUpdate, setTaskToUpdate] = useState<ITask | null | undefined>(null)
+  const [open, setOpen] = useState<boolean>(false);
+  const [taskToUpdate, setTaskToUpdate] = useState<ITask | null | undefined>(
+    null
+  );
 
   //des. hooks
   const { ToogleMore } = useToogle();
@@ -46,21 +56,24 @@ const TaskList = ({  textCard,  dateTask,  taskDifficulty,taskId, task,taskList,
   const dateObject = new Date(dateTask);
   const formatedDate = formatDate.format(dateObject).toString();
 
-  const toogleEdit = (task: ITask | null | undefined) :  void => {
-    setTaskToUpdate(task)
-      setOpen(true)
+  const toogleEdit = (task: ITask | null | undefined): void => {
+    setTaskToUpdate(task);
+    setOpen(true);
   };
 
-  const updateTask = (id: number, nameTask: string, difficulty: number, date: string) => {
-
-const updatedTask: ITask = {id, nameTask, difficulty, date } 
-const updatedItems = taskList.map((task) => {
-  return task.id === updatedTask.id ? updatedTask : task
-})
-setTaskList(updatedItems)
-setOpen(false)
-
-  }
+  const updateTask = (
+    id: number,
+    nameTask: string,
+    difficulty: number,
+    date: string
+  ) => {
+    const updatedTask: ITask = { id, nameTask, difficulty, date };
+    const updatedItems = taskList.map((task) => {
+      return task.id === updatedTask.id ? updatedTask : task;
+    });
+    setTaskList(updatedItems);
+    setOpen(false);
+  };
 
   //deleting task
   const handleDeleteTask = (id: number) => {
@@ -100,7 +113,8 @@ setOpen(false)
               </button>
             </div>
             <div className="text-white">
-              <DropMenu toogleEdit={() => toogleEdit(task)  }
+              <DropMenu
+                toogleEdit={() => toogleEdit(task)}
                 handleDelete={() => {
                   handleDeleteTask(taskId);
                 }}
@@ -133,8 +147,14 @@ setOpen(false)
           </span>
         </div>
       </div>
-<TaskEditModal openModal={open} setOpen={setOpen} taskList={taskList} setTaskList={setTaskList} updateTask={updateTask} task={taskToUpdate} /> 
-    
+      <TaskEditModal
+        openModal={open}
+        setOpen={setOpen}
+        taskList={taskList}
+        setTaskList={setTaskList}
+        updateTask={updateTask}
+        task={taskToUpdate}
+      />
     </div>
   );
 };

@@ -1,16 +1,15 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
-interface Props  {
-handleDelete :   React.MouseEventHandler<HTMLButtonElement>; 
- toogleEdit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+interface Props {
+  handleDelete: React.MouseEventHandler<HTMLButtonElement>;
+  toogleEdit: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const DropMenu = ({handleDelete, toogleEdit} : Props) => {
+const DropMenu = ({ handleDelete, toogleEdit }: Props) => {
   return (
     <Menu as="div" className="relative inline-block">
       <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-xs hover:ring-1  hover:ring-1-inset ">
-      
-          <i className="bi bi-three-dots-vertical "></i>
+        <i className="bi bi-three-dots-vertical "></i>
       </MenuButton>
 
       <MenuItems
@@ -19,24 +18,27 @@ const DropMenu = ({handleDelete, toogleEdit} : Props) => {
       >
         <div className="py-1">
           <MenuItem>
-            <button onClick={toogleEdit}
+            <button
+              onClick={toogleEdit}
               className="w-full  block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-            ><i className="bi bi-pencil-square  text-blue-400 mr-2"></i>
+            >
+              <i className="bi bi-pencil-square  text-blue-400 mr-2"></i>
               Editar
             </button>
           </MenuItem>
- 
-       <MenuItem>
-            <button onClick={handleDelete}
+
+          <MenuItem>
+            <button
+              onClick={handleDelete}
               className="w-full block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-            ><i className="bi bi-trash text-red-500 mr-2"></i>
+            >
+              <i className="bi bi-trash text-red-500 mr-2"></i>
               Deletar
             </button>
           </MenuItem>
-
         </div>
       </MenuItems>
     </Menu>
-  )
-}
+  );
+};
 export default DropMenu;
